@@ -1,38 +1,141 @@
-.App {
-  text-align: center;
+html {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  width: 100%;
+  height: 100vh;
+
+  background: rgb(191,187,200);
+  background: linear-gradient(308deg, rgba(191,187,200,1) 0%, rgba(245,246,246,1) 100%);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.PDFViewerWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.281)
+}
+
+.PDFViewer {
+  width: 90%;
+  height: 90%;
+}
+
+.PDFViewer__buttonOpen {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  color: rgb(121, 7, 7);
+}
+
+/* mainForm */
+.mainForm {
+  width: 980px;
+  min-height: 800px; /* change */
+  margin: 20px auto;
+  padding: 20px;
+
+  background-color: white;
+  border-radius: 32px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.mainForm__title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.mainForm__main {
+  padding: 20px 0;
+  background-color: rgba(245,246,246,1);
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+}
+
+.mainForm__inputWrapper {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  margin-left: 40px;
+}
+
+.mainForm__itemInputWrapper {
+  margin-top: 40px;
+}
+
+
+/* ItemInput */
+.itemInput {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 14px;
+  background-color: rgba(245,246,246,1);
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+}
+
+.itemInput__number {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+  width: 40px;
+  margin-right: 10px;
+
+  border-radius: 8px;
+  border: 1px solid gray;
 }
 
-.App-link {
-  color: #61dafb;
+.itemInput__input {
+  margin-left: 3px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.itemInput__secondInput {
+  width: 85px;
+  margin-left: 3px;
+}
+
+.mainForm__buttonsWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+  padding: 14px;
+  background-color: rgba(245,246,246,1);
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+}
+
+.mainForm__button {
+  padding: 10px;
+
+  border-radius: 8px;
+}
+
+.mainForm__button a {
+  text-decoration: none;
+  color: inherit
 }

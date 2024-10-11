@@ -2,7 +2,9 @@
   "name": "report-generator",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vlad32032.github.io/report-generator",
   "dependencies": {
+    "@react-pdf/renderer": "^4.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -10,6 +12,7 @@
     "@types/node": "^16.18.112",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
+    "gh-pages": "^6.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -20,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
