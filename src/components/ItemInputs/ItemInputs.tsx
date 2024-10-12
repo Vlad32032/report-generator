@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 interface IItemInput {
     addItem: (name: string, type: string, quantity: string, price: string) => void,
@@ -22,7 +22,7 @@ const ItemInput = ({ addItem, removeItem, number, propValue}: IItemInput ) => {
     const canAdd = propValue ? false : true
 
     const onClickAdd = () => {
-        addItem(value.name, value.price, value.quantity, value.type)
+        addItem(value.name, value.type, value.quantity, value.price)
         setValue({
             name: '',
             type: '',

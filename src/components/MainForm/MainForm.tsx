@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import ReactPDF, { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer"
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer"
 
 import MyDocument from "../MyDocument/MyDocument"
 import ItemInput from "../ItemInputs/ItemInputs"
