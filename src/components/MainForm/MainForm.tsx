@@ -150,7 +150,12 @@ const MainForm = () => {
         countPrice()
     }, [value.items])
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [viewerOpen])
+
     return (
+        <>
         <form className="mainForm">
             <h1 className="mainForm__title">Выставить акт выполненных работ</h1>
 
@@ -198,8 +203,7 @@ const MainForm = () => {
                     <PDFDownloadLink  document={<MyDocument {...value} />} fileName="somename.pdf">Скачать</PDFDownloadLink>
                 </button>
             </div>
-
-            
+        </form>
 
             { viewerOpen &&
                 <div className="PDFViewerWrapper">
@@ -210,7 +214,8 @@ const MainForm = () => {
                     <button className="PDFViewer__buttonOpen"  onClick={() => setViewerOpen(!viewerOpen)} type='button'>Закрыть</button>
                 </div>
             }
-        </form>
+
+        </>
     )
 }
 
