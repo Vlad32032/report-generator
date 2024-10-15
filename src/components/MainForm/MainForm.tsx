@@ -10,6 +10,7 @@ interface IItem {
     type: string,
     quantity: string,
     price: string,
+    id: string,
 }
  
 export interface IValue {
@@ -53,7 +54,7 @@ const MainForm = () => {
     const setDate = (date: any) => {
         const arr = date.split('-');
 
-        const year = arr[0].slice(2);
+        const year = arr[0].substr(arr[0].length - 2);
         const monthNum =  arr[1];
 
         let month
@@ -119,9 +120,9 @@ const MainForm = () => {
     // }
 
     const countPrice = () => {
-        const all = value.items.reduce((acc, item) => (Number(item.price) * Number(item.quantity)) + acc, 0)
-        const nds = all / 100 * 20
-        const allAndNds = all + nds
+        const allAndNds = Number(value.items.reduce((acc, item) => (Number(item.price) * Number(item.quantity)) + acc, 0).toFixed(2))
+        const nds = Number((allAndNds / 120 * 20).toFixed(2))
+        const all = allAndNds - nds
 
         setValue({...value, price: {all, nds, allAndNds}})
     }
@@ -133,13 +134,14 @@ const MainForm = () => {
             type: type,
             quantity: quantity,
             price: price,
+            id: `${value.items.length + price}${name}`
         }
 
         setValue({...value, items: [...value.items, item]})
     }
 
-    const removeItem = (number: string) => {
-        const arr = value.items.filter((item) => item.number !== number)
+    const removeItem = (id: string) => {
+        const arr = value.items.filter((item) => item.id !== id)
 
         setValue({...value, items: [...arr]})
     }
@@ -153,33 +155,40 @@ const MainForm = () => {
             <h1 className="mainForm__title">Выставить акт выполненных работ</h1>
 
             <div className="mainForm__main">
-                <div className="mainForm__inputWrapper">
-                    <label>Акт выполненых работ №</label>
-                    <input type="number" onChange={(e) => setValue({...value, actNumber: e.target.value})}/>
+                <div className="mainForm__inputWrapper inputWrapper">
+                    <input className="input" type="number" placeholder="" value={value.actNumber}
+                        onChange={(e) => {
+                            Number(e.target.value) < 9999999 ? setValue({...value, actNumber: e.target.value}) : setValue({...value, actNumber: "9999999"})
+                        }}
+                        min={1} max={9999999}/>
+                    <label className="inputLabel">Акт выполненых работ №</label>
                 </div>
 
-                <div className="mainForm__inputWrapper">
-                    <label>Дата</label>
-                    <input type="date" onChange={(e) => setDate(e.target.value)}/>
+                <div className="mainForm__inputWrapper inputWrapper">
+                    <input className="input" type="date" placeholder="" onChange={(e) => setDate(e.target.value)}/>
+                    <label className="inputLabel">Дата</label>
                 </div>
             
-                <div className="mainForm__inputWrapper">
-                    <label>Исполнитель</label>
-                    <input type="text" onChange={(e) => setValue({...value, worker: e.target.value})}/>
+                <div className="mainForm__inputWrapper inputWrapper">
+                    
+                    <input className="input" type="text" placeholder="" maxLength={75}
+                        onChange={(e) => setValue({...value, worker: e.target.value})}/>
+                    <label className="inputLabel">Исполнитель</label>
                 </div>
 
-                <div className="mainForm__inputWrapper">
-                    <label>Заказчик</label>
-                    <input type="text" onChange={(e) => setValue({...value, employer: e.target.value})}/>
+                <div className="mainForm__inputWrapper inputWrapper">
+                    <input className="input" type="text" placeholder="" maxLength={75} 
+                        onChange={(e) => setValue({...value, employer: e.target.value})}/>
+                    <label className="inputLabel">Заказчик</label>
                 </div>
             </div>
 
             <div className="mainForm__itemInputWrapper">
                 {
-                    value.items.map((item) => <ItemInput key={item.number} addItem={addItem} removeItem={removeItem} number={item.number} propValue={{...item}}/>)
+                    value.items.map((item, i) => <ItemInput key={item.number} addItem={addItem} removeItem={removeItem} number={`${i + 1}`} id={item.id} propValue={{...item}}/>)
                 }
 
-                <ItemInput addItem={addItem} removeItem={removeItem} number={`${value.items.length + 1}`} />
+                <ItemInput addItem={addItem} removeItem={removeItem} number={`${value.items.length + 1}`} id={'1'} />
             </div>
             
             <div className="mainForm__buttonsWrapper">

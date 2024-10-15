@@ -4,6 +4,7 @@ interface IItemInput {
     addItem: (name: string, type: string, quantity: string, price: string) => void,
     removeItem: (number: string) => void,
     number: string,
+    id: string,
     propValue?: {
         name: string,
         type: string,
@@ -12,7 +13,7 @@ interface IItemInput {
     }
 }
 
-const ItemInput = ({ addItem, removeItem, number, propValue}: IItemInput ) => {
+const ItemInput = ({ addItem, removeItem, number, id, propValue}: IItemInput ) => {
     const [value, setValue] = useState({
         name: propValue?.name || '',
         type: propValue?.type || '',
@@ -38,37 +39,37 @@ const ItemInput = ({ addItem, removeItem, number, propValue}: IItemInput ) => {
             <div className="itemInput">
                 <h3 className="itemInput__number">{number}</h3>
 
-                <div>
-                    <label>Наименование</label>
-                    <input className="itemInput__input" type="text"
+                <div className="itemInput__inputMainWrapper inputWrapper">
+                    <input className="itemInput__input input" type="text" placeholder=""
                         value={value.name} onChange={(e) => canAdd && setValue({...value, name: e.target.value})}
                     />
+                    <label className="inputLabel">Наименование</label>
                 </div>
 
-                <div>
-                    <label>Ед. Изм.</label>
-                    <input className="itemInput__secondInput" type="text"
+                <div className="itemInput__inputWrapper inputWrapper">
+                    <input className="itemInput__secondInput input" type="text" placeholder=""
                         value={value.type} onChange={(e) => canAdd && setValue({...value, type: e.target.value})}
                     />
+                    <label className="inputLabel">Ед. Изм.</label>
                 </div>
 
-                <div>
-                    <label>Количество</label>
-                    <input className="itemInput__secondInput" type="number"
+                <div className="itemInput__inputWrapper inputWrapper">
+                    <input className="itemInput__secondInput input" type="number" placeholder=""
                         value={value.quantity} onChange={(e) => canAdd && setValue({...value, quantity: e.target.value})}
                     />
+                    <label className="inputLabel">Количество</label>
                 </div>
 
-                <div>
-                    <label>Цена</label>
-                    <input className="itemInput__secondInput" type="number"
+                <div className="itemInput__inputWrapper inputWrapper">
+                    <input className="itemInput__secondInput input" type="number" placeholder=""
                         value={value.price} onChange={(e) => canAdd && setValue({...value, price: e.target.value})}
                     />
+                    <label className="inputLabel">Цена</label>
                 </div>
 
                 { canAdd
-                    ? <button onClick={onClickAdd} type="button">Добавить</button>
-                    : <button onClick={() => removeItem(number)} type="button">Удалить</button>
+                    ? <button className="itemInput__button" onClick={onClickAdd} type="button">Добавить</button>
+                    : <button className="itemInput__button itemInput__button--remove" onClick={() => removeItem(id)} type="button">Удалить</button>
                 }
             </div>
         </div>

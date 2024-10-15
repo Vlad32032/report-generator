@@ -10,12 +10,29 @@ html {
   margin: 0;
 }
 
-body {
-  width: 100%;
-  height: 100vh;
+input {
+  outline: none;
+}
 
-  background: rgb(191,187,200);
-  background: linear-gradient(308deg, rgba(191,187,200,1) 0%, rgba(245,246,246,1) 100%);
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(27deg, rgba(0,5,40,1) 0%, rgba(32,82,125,1) 41%, rgba(59,59,176,1) 55%, rgba(0,5,40,1) 100%);
+
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .PDFViewerWrapper {
@@ -27,10 +44,11 @@ body {
   justify-content: center;
   align-items: center;
 
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
 
-  background-color: rgba(0, 0, 0, 0.281)
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .PDFViewer {
@@ -52,37 +70,93 @@ body {
 
 /* mainForm */
 .mainForm {
+  position: relative;
+
   width: 980px;
   min-height: 800px; /* change */
   margin: 20px auto;
   padding: 20px;
+  padding-bottom: 131px;
 
   background-color: white;
-  border-radius: 32px;
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  background-color: #1d1d1d;
+  /* backdrop-filter: blur(30px); */
+
+  border-radius: 24px;
+  box-shadow: 0px 40px 80px 10px rgba(0, 0, 0, 0.5);
 }
 
 .mainForm__title {
   text-align: center;
   margin-bottom: 40px;
+  font-family: "Pacifico", cursive;
+  color: white;
 }
 
 .mainForm__main {
-  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  padding: 20px 40px;
   background-color: rgba(245,246,246,1);
   border-radius: 8px;
   box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
 }
 
-.mainForm__inputWrapper {
+/* .mainForm__inputWrapper {
   display: flex;
   gap: 10px;
   margin-top: 5px;
   margin-left: 40px;
-}
+} */
 
 .mainForm__itemInputWrapper {
   margin-top: 40px;
+}
+
+.mainForm__buttonsWrapper {
+  position: absolute;
+  bottom: 20px;
+
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: calc(100% - 40px);
+  padding: 14px;
+
+  background-color: #323940;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+}
+
+.mainForm__button {
+  padding: 2px 20px;
+
+  background-color: #97BF6F;
+  border-radius: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  font-family: "Pacifico", cursive;
+  font-size: 20px;
+  color: black;
+
+  transition: background-color 300ms, transform 100ms;
+
+
+  cursor: pointer;
+}
+
+.mainForm__button a {
+  text-decoration: none;
+  color: inherit
+}
+
+.mainForm__button:hover {
+  background-color: #BCF285;
+}
+
+.mainForm__button:active {
+  transform: translateY(2px);
 }
 
 
@@ -97,16 +171,29 @@ body {
   box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
 }
 
+.itemInput__inputWrapper {
+  width: 150px;
+  height: 35px;
+}
+
+.itemInput__inputMainWrapper {
+  width: 250px;
+  height: 35px;
+}
+
 .itemInput__number {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 40px;
+  width: 35px;
+  aspect-ratio: 1;
   margin-right: 10px;
+  padding-bottom: 3px;
 
   border-radius: 8px;
-  border: 1px solid gray;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  font-size: 20px;
 }
 
 .itemInput__input {
@@ -118,24 +205,98 @@ body {
   margin-left: 3px;
 }
 
-.mainForm__buttonsWrapper {
+.itemInput__button {
+  padding: 2px 10px;
+
+  border-radius: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  font-family: "Pacifico", cursive;
+  color: rgb(18, 124, 53);
+
+  transition: background-color 300ms, transform 100ms;
+
+  cursor: pointer;
+}
+
+.itemInput__button--remove {
+  color: rgb(121, 32, 10);
+}
+
+.itemInput__button:hover {
+  background-color: white;
+}
+
+.itemInput__button:active {
+  transform: translateY(2px);
+}
+
+/* input  */
+.inputWrapper {
+  position: relative;
+
   display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
-  padding: 14px;
-  background-color: rgba(245,246,246,1);
+  align-items: center;
+
+  max-width: 350px;
+  /* padding: 4px 14px; */
+
+  background-color: inherit;
+  border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 8px;
-  box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
-.mainForm__button {
-  padding: 10px;
+.input {
+  position: relative;
 
-  border-radius: 8px;
+  width: 100%;
+  padding: 8px 14px;
+  background: transparent;
+  border: none
 }
 
-.mainForm__button a {
-  text-decoration: none;
-  color: inherit
+.inputLabel {
+  position: absolute;
+  top: 0;
+  left: 10px;
+
+  padding: 0 3px;
+
+  background-color: transparent;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.8);
+
+  transition: 
+    top 300ms,
+    background-color 300ms,
+    font-size 300ms,
+    color 300ms;
+}
+
+.inputWrapper:hover .input {
+  z-index: 1;
+}
+
+.input:focus ~ .inputLabel,
+.input:not(:placeholder-shown).input:not(:focus) ~ .inputLabel {
+  top: -14px;
+
+  background-color: inherit;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.input:invalid {
+  color: rgb(121, 10, 10);
+  text-decoration: underline;
+}
+
+
+@media (max-width: 1020px) {
+  body {
+    background: rgb(21, 21, 63);
+  }
 }

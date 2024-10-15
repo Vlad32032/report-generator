@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 
   title__number: {
-    width: '50',
+    width: '100',
     paddingLeft: '2',
     borderBottomWidth: '1',
     borderStyle: 'solid',
@@ -107,11 +107,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flexGrow: 1,
-    height: '19',
+    height: '20',
+    marginTop: '-1px',
     borderWidth: '1',
     borderStyle: 'solid',
     borderColor: 'fff',
-    borderTop: 'none',
+    // borderTop: 'none',
   },
 
   table__finalRow: {
@@ -171,10 +172,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '75',
     height: '20',
+    marginTop: '-1px',
     borderWidth: '1',
     borderStyle: 'solid',
     borderColor: 'fff',
-    borderTop: 'none',
+    // borderTop: 'none',
   },
 
   // final
@@ -271,9 +273,9 @@ const MyDocument = ({ actNumber, worker, employer, date, items, price }: IValue)
         </View>
 
         { items.length > 0
-          ? items.map((item) => <View style={styles.table__Row}>
+          ? items.map((item, i) => <View style={styles.table__Row} wrap={false}>
               <View style={[styles.table__column, styles.table__column1]}>
-                <Text>{item.number}</Text>
+                <Text>{`${i + 1}`}</Text>
               </View>
               <View style={[styles.table__column, styles.table__column2]}>
                 <Text>{item.name}</Text>
@@ -292,7 +294,7 @@ const MyDocument = ({ actNumber, worker, employer, date, items, price }: IValue)
               </View>
             </View>)
 
-          : <View style={styles.table__Row}>
+          : <View style={styles.table__Row} wrap={false}>
               <View style={[styles.table__column, styles.table__column1]}>
                 <Text>1</Text>
               </View>
@@ -314,56 +316,57 @@ const MyDocument = ({ actNumber, worker, employer, date, items, price }: IValue)
             </View>
         }
 
+        <View wrap={false}>
+          <View style={styles.table__finalRow}>
+            <View style={styles.table__finalColumn1}>
+              <Text>Итого без НДС:</Text>
+            </View>
+            <View style={styles.table__finalColumn2}>
+              <Text>{price.all}</Text>
+            </View>
+          </View>
+
+          <View style={styles.table__finalRow}>
+            <View style={styles.table__finalColumn1}>
+              <Text>Итого НДС:</Text>
+            </View>
+            <View style={styles.table__finalColumn2}>
+              <Text>{price.nds}</Text>
+            </View>
+          </View>
+
+          <View style={styles.table__finalRow}>
+            <View style={styles.table__finalColumn1}>
+              <Text>Всего к оплате:</Text>
+            </View>
+            <View style={styles.table__finalColumn2}>
+              <Text>{price.allAndNds}</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+
+      <View wrap={false}>
+        <View style={styles.finalInfo}>
+          <Text>{"Вышеперечисленные работы (услуги) выполнены полностью и в срок. Заказчик претензий по объему, качеству и срокам оказания услуг претензий не имеет."}</Text>
+        </View>
         
+        <View style={styles.signature}>
+          <View style={styles.signature__wrapper}>
+            <View style={styles.signature__wrapperInfo}>
+              <Text>Исполнитель</Text>
+              <Text style={styles.signature__text}></Text>
+            </View>
+            <Text style={styles.signature__printPlace1}>М.П.</Text>
+          </View>
 
-        <View style={styles.table__finalRow}>
-          <View style={styles.table__finalColumn1}>
-            <Text>Итого без НДС:</Text>
+          <View style={styles.signature__wrapper}>
+            <View style={styles.signature__wrapperInfo}>
+              <Text>Заказчик</Text>
+              <Text style={styles.signature__text}></Text>
+            </View>
+            <Text style={styles.signature__printPlace2}>М.П.</Text>
           </View>
-          <View style={styles.table__finalColumn2}>
-            <Text>{price.all}</Text>
-          </View>
-        </View>
-
-        <View style={styles.table__finalRow}>
-          <View style={styles.table__finalColumn1}>
-            <Text>Итого НДС:</Text>
-          </View>
-          <View style={styles.table__finalColumn2}>
-            <Text>{price.nds}</Text>
-          </View>
-        </View>
-
-        <View style={styles.table__finalRow}>
-          <View style={styles.table__finalColumn1}>
-            <Text>Всего к оплате:</Text>
-          </View>
-          <View style={styles.table__finalColumn2}>
-            <Text>{price.allAndNds}</Text>
-          </View>
-        </View>
-
-      </View>
-
-      <View style={styles.finalInfo}>
-        <Text>{"Вышеперечисленные работы (услуги) выполнены полностью и в срок. Заказчик претензий по объему, качеству и срокам оказания услуг претензий не имеет."}</Text>
-      </View>
-      
-      <View style={styles.signature}>
-        <View style={styles.signature__wrapper}>
-          <View style={styles.signature__wrapperInfo}>
-            <Text>Исполнитель</Text>
-            <Text style={styles.signature__text}></Text>
-          </View>
-          <Text style={styles.signature__printPlace1}>М.П.</Text>
-        </View>
-
-        <View style={styles.signature__wrapper}>
-          <View style={styles.signature__wrapperInfo}>
-            <Text>Заказчик</Text>
-            <Text style={styles.signature__text}></Text>
-          </View>
-          <Text style={styles.signature__printPlace2}>М.П.</Text>
         </View>
       </View>
     </Page>
