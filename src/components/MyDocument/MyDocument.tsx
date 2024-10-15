@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 
   title__number: {
-    width: '100',
+    minWidth: '30',
     paddingLeft: '2',
     borderBottomWidth: '1',
     borderStyle: 'solid',
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 
   date__month: {
     width: '100',
-    paddingLeft: '3',
+    paddingLeft: '30',
     borderBottomWidth: '1',
     borderStyle: 'solid',
     borderColor: 'fff',

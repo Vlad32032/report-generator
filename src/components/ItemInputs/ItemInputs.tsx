@@ -40,29 +40,29 @@ const ItemInput = ({ addItem, removeItem, number, id, propValue}: IItemInput ) =
                 <h3 className="itemInput__number">{number}</h3>
 
                 <div className="itemInput__inputMainWrapper inputWrapper">
-                    <input className="itemInput__input input" type="text" placeholder=""
+                    <input className="itemInput__input input" type="text" placeholder="" maxLength={30}
                         value={value.name} onChange={(e) => canAdd && setValue({...value, name: e.target.value})}
                     />
                     <label className="inputLabel">Наименование</label>
                 </div>
 
                 <div className="itemInput__inputWrapper inputWrapper">
-                    <input className="itemInput__secondInput input" type="text" placeholder=""
+                    <input className="itemInput__secondInput input" type="text" placeholder="" maxLength={8}
                         value={value.type} onChange={(e) => canAdd && setValue({...value, type: e.target.value})}
                     />
                     <label className="inputLabel">Ед. Изм.</label>
                 </div>
 
                 <div className="itemInput__inputWrapper inputWrapper">
-                    <input className="itemInput__secondInput input" type="number" placeholder=""
-                        value={value.quantity} onChange={(e) => canAdd && setValue({...value, quantity: e.target.value})}
+                    <input className="itemInput__secondInput input" type="number" placeholder="" max="99999"
+                        value={value.quantity} onChange={(e) => canAdd && Number(e.target.value) < 99999 ? setValue({...value, quantity: e.target.value}) : setValue({...value, quantity: "99999"})}
                     />
                     <label className="inputLabel">Количество</label>
                 </div>
 
                 <div className="itemInput__inputWrapper inputWrapper">
-                    <input className="itemInput__secondInput input" type="number" placeholder=""
-                        value={value.price} onChange={(e) => canAdd && setValue({...value, price: e.target.value})}
+                    <input className="itemInput__secondInput input" type="number" placeholder="" max="9999999"
+                        value={value.price} onChange={(e) => canAdd && Number(e.target.value) < 9999999 ? setValue({...value, price: e.target.value}) : setValue({...value, price: "9999999"})}
                     />
                     <label className="inputLabel">Цена</label>
                 </div>
